@@ -16,7 +16,7 @@
 - 可以在Lane上招喚魔法(play)進行戰術變化
 - 
 ## 球員
-總共有五種類型的球員可以招喚，每個球員有五個參數
+總共有五種類型的球員可以招喚，每個球員有以下參數
 ### 參數(Parameters)說明
 - health: 目前生命值
 - maxHealth: 最大生命值
@@ -24,6 +24,10 @@
 - speed: 每秒移動速度
 - push: 撞到對手時，對手會後退多少格
 - cost: 招喚詠唱時間
+- color: 所屬單位顏色，可以用來跟英雄的顏色比較``` player.color==hero.color```判斷屬於我方或是敵方(不要直接判斷顏色，顏色會變換)
+- lane:目前角色所在賽道
+- x: 角色所在x座標(注意沒有pos)
+- y: 角色所在y座標(注意沒有pos)
 
 ```python
 #遊戲中都可以使用 
@@ -110,6 +114,62 @@ friend.health
 if hero.isReady("press"):
     hero.play("press", 1)
 ```
+### 掃描我方單位
+掃描當下特定賽道上的我方球員，資料將以陣列形式回傳
+``` hero.findPlayers(賽道編號)```
+- 如果要掃描全畫面，請使用for迴圈逐行掃描
+- 如果要取得數量，可以多加一個len()，變成
+```
+len(hero.findPlayers(賽道編號))
+```
+- 如果要逐一比較或是處理，請使用for迴圈逐一判斷
+### 掃描對方單位
+掃描當下特定賽道上的對方球員，資料將以陣列形式回傳
+``` hero.findTheirPlayer(賽道編號)```
+- 如果要掃描全畫面，請使用for迴圈逐行掃描
+- 如果要取得數量，可以多加一個len()
 
-  - ratio: 1.5
-  - ratio: 1.5
+### 掃描雙方單位
+掃描當下特定賽道上的雙方球員，資料將以陣列形式回傳
+``` hero.findPlayers(賽道編號)```
+- 如果要掃描全畫面，請使用for迴圈逐行掃描
+- 如果要取得數量，可以多加一個len()
+- 如果要判斷屬於敵方或是我方，可以使用color判斷，如```player.color==hero.color```
+
+### 掃描雙方特定類型單位
+掃描當下所有賽道上的雙方球員，資料將以陣列形式回傳
+``` hero.findPlayers("球員類型")```
+- 如果要掃描全畫面，請使用for迴圈逐行掃描
+- 如果要取得數量，可以多加一個len()
+- 如果要判斷屬於敵方或是我方，可以使用color判斷，如```player.color==hero.color```
+
+### 測量距離
+測量目標球員與英雄的距離
+``` hero.distanceTo(球員物件)```
+- 通常會搭配Nearest使用，只判斷距離英雄最近的敵人距離，針對最靠近的敵人做出回應
+- 也可以使用player或是hero.opponent去測量距離
+```python
+#當敵人距離英雄小於30公尺，則發動流沙魔法
+players = hero.findTheirPlayers()
+nearest = hero.findNearest(players)
+if hero.distanceTo(nearest) < 30:
+    hero.play('quicksand', nearest.lane)
+```
+### 尋找物件最近的敵人
+``` hero.findNearest(球員陣列)```
+將會返回距離英雄最近的敵人，也可以使用player.findNearest(球員陣列)，則可以返回與該名player最近的目標，角色也可以切換為對方英雄如```hero.opponent.findNearest(球員陣列)```
+通常會跟上面搭配使用
+
+###  取得遊戲時間
+可以利用```hero.time```判斷遊戲時間，在不同時間採取不同策略
+
+### 取得目前分數
+可以利用```hero.score```或是```hero.opponent```去獲得我方或是對方得分
+
+### 取得隊伍顏色
+```hero.color```或是```hero.opponent.color```去取得隊伍顏色，將會返回"red"或是"blue"
+
+##建議戰術
+- 找尋最多敵人(或是敵人數量-我方球員數量)最多的lane發動流沙
+- 尋找沒有敵人的lane發動快攻
+- 
