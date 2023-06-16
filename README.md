@@ -1,1 +1,65 @@
-# codecombat-strategy
+
+# 沙漠決鬥(Desert Duel)
+比賽網址： https://codecombat.com/play/level/desert-duel
+
+## 規則
+- 先獲得五十分的人致勝，如果兩分鐘時沒有人獲得五十分，則高分者勝出，若平分則進入PK驟死賽，只要有任何人獲得分數則勝出。
+- 比賽有三條路線(Lane)，分別用數字0,1,2代表中、上、下三條賽道
+- 可以在lane上招喚(summon)選手，選手被招喚後將自動前進
+  - 將會從我方二分線招喚並直接往對方前進 
+  - 接近對方的二分線時將會自動射門並保證100%命中
+  - 如果遇到對方球員會被往後推，被推動的幅度與force參數相關
+  - 球員有多種類型可供招喚，球場上最多只能招喚三隻同樣類型的球員
+    - 第一個招喚出來的將是主力，能力值最強
+    - 第二個則為二軍，第三個為三軍
+    - 當有球員完成投籃或是死掉的話，會回收進入候補區可以再次招喚
+- 可以在Lane上招喚魔法(play)進行戰術變化
+- 
+## 球員
+總共有五種類型的球員可以招喚，每個球員有五個參數
+### 參數(Parameters)
+- health: 目前生命值
+- maxHealth: 最大生命值
+- damage: 攻擊力
+- speed: 每秒移動速度
+- push: 撞到對手時，對手會後退多少格
+- cost: 招喚詠唱時間
+
+```python
+#遊戲中都可以使用 
+enemy.health
+#或是
+friend.health
+#偷看參數等資料
+```
+
+### 類型(Types)
+請注意，以下參數都是主力球員，如果是二軍需要乘以0.85(打八五折)，三軍0.7(打七折)
+
+### 魔法
+#### 共同參數說明
+- cooldown : 冷卻時間，在發動魔法後會有短暫時間無法動彈，程式碼將會被block直到cooldown時間結束。若在激烈戰鬥時必須警慎考慮此參數對戰局的影響
+- specificCooldown: 再次發動相同魔法所需的時間，不會直接使用，遊戲中可以用isReady檢查即可
+- duration: 法術效果持續時間
+#### 魔法說明
+- "boost" 加速魔法-增加我方速度
+  - cooldown:0.3s
+  - specificCooldown: 7s
+  - duration: 2s 
+  - ratio: 1.5
+- "press" 減速魔法-降低對手速度
+  - cooldown:0.3s
+  - specificCooldown: 5s
+  - duration: 2s
+  - ratio: 0.5
+- "quicksand" 流沙魔法-殺死特定賽道上全部球員(包含我方)
+  - cooldown:0.5s
+  - specificCooldown: 15s
+- "goliath" 哥利雅巨大魔法-特定賽道上的第一位球員可以獲得兩倍生命值
+  - cooldown:0.2s
+  - specificCooldown: 8s
+  - ratio: 2
+- "hot" 狂暴魔法，可以增加特定賽道第一名球員的速度，並且獲得三分射籃的能力
+  - cooldown:0.2s
+  - specificCooldown: 10s
+  - ratio: 1.5
