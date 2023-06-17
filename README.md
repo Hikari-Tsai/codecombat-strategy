@@ -1,5 +1,6 @@
 
 # 沙漠決鬥(Desert Duel)
+![](https://codecombat.com/file/db/level/62540bd270cb4400504ad44c/Basketball-Arena-Banner-01.jpg)
 比賽網址： https://codecombat.com/play/level/desert-duel
 
 ## 規則
@@ -77,6 +78,9 @@ friend.health
   - cooldown:0.2s
   - specificCooldown: 10s
   - ratio: 1.5
+- "switch" 傳送魔法，直接對調上在下兩條賽道的我方隊員(不需要第二個參數)
+  - cooldown:0.1s
+  - specificCooldown: 5s
 ## 程式方法
 ### 招喚程式
 於特定賽道上招喚特定球員
@@ -146,14 +150,15 @@ if hero.distanceTo(nearest) < 30:
 
 ## 建議戰術
 - 找尋即將失守的lane，發動流沙
-  - 即將失守？
+  - 即將失守的定義？
     - 最靠近的敵人距離hero小於某個特定值?
-    - lane上的敵人超過一個數量?
-    - lane上的敵人減去我方隊員，超過一個特定數量?
+    - lane上的敵人超過某個特定數量?
+    - lane上的敵人超過我方隊員數量?個
+    - lane上偵測到類型為"big"的對方球員，且被施放了歌莉雅魔法(血量大於預設值)
 - 尋找沒有敵人的lane發動快攻
-  - 需要先寫一隻函數，可以不斷掃描，當發現有lane上面沒有敵人時，回傳lane的編號
-  - 在沒敵人的lane上招喚driver發動快攻
-  - 立刻施放魔法"hot"以及"boost" 
+  - 不斷掃描，當發現有lane上面沒有敵人時，回傳lane的編號
+  - 在沒敵人的lane上招喚速度最快的"driver"發動快攻
+  - 招喚後立刻追加魔法"hot"以及"boost" 
 
 ## 範例程式
 ### 尋找最多敵人的路徑
