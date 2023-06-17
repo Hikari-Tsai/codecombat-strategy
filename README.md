@@ -40,53 +40,28 @@ friend.health
 ### 類型(Types)
 請注意，以下參數都是主力球員，如果是二軍需要乘以0.85(打八五折)，三軍0.7(打七折)
 ## 球員類型(Type)
-- "threat"
-  - health: 10
-  - damage: 10
-  - speed: 10
-  - push: 40
-  - range: 15
-  - cost: 1
-- "charger"
-  - health: 10
-  - damage: 20
-  - speed: 6
-  - push: 30
-  - range: 7
-  - cost: 1
-- "big"
-  - health: 40
-  - damage: 6
-  - speed: 5
-  - push: 5
-  - range: 7
-  - cost: 1
-- "driver"
-  - health: 6
-  - damage: 15
-  - speed: 14
-  - push: 10
-  - range: 15
-  - cost: 1
-- "sniper"
-  - health: 5
-  - damage: 5
-  - speed: 9
-  - push: 5
-  - range: 30
-  - cost: 1
+|        | "threat"    | "charger"    | "big"      | "driver"    | "sniper"    |
+|  ----  | :----:  | :----:  | :----:  | :----:  | :----:  |
+| health  | 10 | 10 | `40` | 6 | 5 |
+| damage  | 10 | `20` | 6 | 15 | 5 |
+| speed  | 10 | 6 | 5 | `14` | 9 |
+| push  | `40` | 30 | 5 | 10 | 5 |
+| range  | 15 | 7 | 7 | 15 | `30` |
+| cost  | 1 | 1 | 1 | 1 | 1 |
+
+
 ## 魔法
 ### 參數說明
 - cooldown : 冷卻時間，在發動魔法後會有短暫時間無法動彈，程式碼將會被block直到cooldown時間結束。若在激烈戰鬥時必須警慎考慮此參數對戰局的影響
 - specificCooldown: 再次發動相同魔法所需的時間，不會直接使用，遊戲中可以用isReady檢查即可
 - duration: 法術效果持續時間
 ### 魔法說明
-- "boost" 加速魔法-增加我方速度
+- "boost" 加速魔法-增加特定賽道上我方速度
   - cooldown:0.3s
   - specificCooldown: 7s
   - duration: 2s 
   - ratio: 1.5
-- "press" 減速魔法-降低對手速度
+- "press" 減速魔法-降低特定賽道上對手速度
   - cooldown:0.3s
   - specificCooldown: 5s
   - duration: 2s
