@@ -56,7 +56,7 @@ friend.health
 - specificCooldown: 再次發動相同魔法所需的時間，不會直接使用，遊戲中可以用isReady檢查即可
 - duration: 法術效果持續時間
 ### 魔法說明
-- "boost" 加速魔法-增加特定賽道上我方速度
+- "boost" 加速魔法-增加特定賽道上我方全體球員速度
   - cooldown:0.3s
   - specificCooldown: 7s
   - duration: 2s 
