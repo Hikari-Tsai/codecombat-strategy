@@ -50,7 +50,7 @@ friend.health
 - "charger"
   - health: 10
   - damage: 20
-  - speed: 60
+  - speed: 6
   - push: 30
   - range: 7
   - cost: 1
@@ -169,7 +169,16 @@ if hero.distanceTo(nearest) < 30:
 ### 取得隊伍顏色
 ```hero.color```或是```hero.opponent.color```去取得隊伍顏色，將會返回"red"或是"blue"
 
-##建議戰術
-- 找尋最多敵人(或是敵人數量-我方球員數量)最多的lane發動流沙
+## 建議戰術
+- 找尋即將失守的lane，發動流沙
+  - 即將失守？
+    - 最靠近的敵人距離hero小於某個特定值?
+    - lane上的敵人超過一個數量?
+    - lane上的敵人減去我方隊員，超過一個特定數量?
 - 尋找沒有敵人的lane發動快攻
-- 
+  - 需要先寫一隻函數，可以不斷掃描，當發現有lane上面沒有敵人時，回傳lane的編號
+  - 在沒敵人的lane上招喚driver發動快攻
+  - 立刻施放魔法"hot"以及"boost" 
+
+## 範例程式
+### 尋找最多敵人的路徑
