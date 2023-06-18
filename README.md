@@ -3,6 +3,12 @@
 ![](https://codecombat.com/file/db/level/62540bd270cb4400504ad44c/Basketball-Arena-Banner-01.jpg)
 比賽網址： https://codecombat.com/play/level/desert-duel
 
+
+## 賽事評論影片
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=8MhfDVoqpcY" target="_blank">
+<img src="http://img.youtube.com/vi/8MhfDVoqpcY/0.jpg" alt="賽事頻論" width="600" border="10" />
+</a>
+
 ## 規則
 - 先獲得五十分的人致勝，如果兩分鐘時沒有人獲得五十分，則高分者勝出，若平分則進入PK驟死賽，只要有任何人獲得分數則勝出。
 - 比賽有三條路線(Lane)，分別用數字0,1,2代表中、上、下三條賽道
