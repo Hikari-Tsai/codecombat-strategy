@@ -161,4 +161,29 @@ if hero.distanceTo(nearest) < 30:
   - 招喚後立刻追加魔法"hot"以及"boost" ，可視情況或用邏輯閘追加"goliath"
 
 ## 範例程式
-### 尋找最多敵人的路徑
+### 基礎招喚主程式
+```python
+soldiers=["threat","big","charger","sniper","driver"]
+i=0
+j=0
+while True:
+    hero.summon(soldiers[i], j)
+    i=i+1
+    if i==len(soldiers):
+    	i=0
+    j=j+1
+    if j==3:
+    	j=0
+```
+### 尋找最少敵人的路徑與敵人數量
+```python
+def findMinEnemyLane():
+	lane=-1
+	numbers=99
+	for i in range(3):
+		Players = len(hero.findTheirPlayers(i))
+		if Players<numbers:
+			numbers=Players
+			lane=i
+	return (lane,numbers)
+```
