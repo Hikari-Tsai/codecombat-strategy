@@ -193,6 +193,62 @@ def findMinEnemyLane():
 			lane=i
 	return (lane,numbers)
 ```
+### 尋找最多敵人的路徑與敵人數量
+請小朋友自行練習
+```python
+#請小朋友參考findMinEnemyLane自行練習修改
+def findMaxEnemyLane():
+	pass
+```
+### 將主程式加入quicksand 以及fast break判斷
+綜合上述函數，整合到主程式內
+```python
+soldiers=["threat","big","charger","sniper"]#,"driver"]
+i=0
+j=0
+while True:
+	hero.summon(soldiers[i], j)
+	i=i+1
+	if i==len(soldiers):
+		i=0
+	j=j+1
+	if j==3:
+		j=0
+	#fastBreak
+	#敵人等於0，發動快攻
+	(lane, numbers)=findMinEnemyLane()
+	if numbers<=0:
+		hero.summon("driver",lane)
+		if hero.isReady("hot") and hero.isReady("boost") and hero.isReady("press") and hero.isReady("goliath"):
+			hero.play("hot",lane)
+			hero.play("boost",lane)
+			hero.play("press",lane)
+			hero.play("goliath",lane)
+	(lane, numbers)=findMaxEnemyLane()
+
+	#敵人大於3，發動流沙
+	if numbers>=3:
+		if hero.isReady("quicksand"):
+			hero.play("quicksand",lane)
+
+def findMinEnemyLane():
+	lane=-1
+	numbers=99
+	for i in range(3):
+		Players = len(hero.findTheirPlayers(i))
+		if Players<numbers:
+			numbers=Players
+			lane=i
+	return (lane,numbers)
+
+#尋找最多敵人的Lane，再於主程式中加入發動quicksand條件
+#請小朋友參考findMinEnemyLane自行練習修改
+def findMaxEnemyLane():
+	pass
+
+
+```
+
 ## 自我練習
 選手基本題
 1. 範例程式中，我選擇同時招換了五種角色，試著改變soliders，使用不同的組合，看看能不能提升排名
